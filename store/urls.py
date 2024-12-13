@@ -9,6 +9,6 @@ urlpatterns = [
     path('contact', contact, name = 'contact'),
     path('products/<slug>/', products, name = 'products'),
     path('register', register, name = 'register'),
-    path('single', single, name = 'single'),
+    path('single/<int:pk>/', single, name = 'single'),
 
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

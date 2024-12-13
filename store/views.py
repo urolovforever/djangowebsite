@@ -1,5 +1,7 @@
-from django.shortcuts import render
-from .models import Category, Product
+from django.shortcuts import render, redirect
+from .models import Category, Product, Buy
+from .forms import ChoiceForm
+
 
 # Home view
 def home(request):
@@ -33,6 +35,17 @@ def register(request):
     return render(request,'register.html', ctx)
 
 # Single product view
-def single(request):
-    ctx = {}
-    return render(request,'single.html', ctx)
+def single (request, pk=None):
+    ctg = Category.objects.all()
+    product_pk = Product.objects.get(pk=pk)
+    form = ChoiceForm()
+    if request.POST:
+        forms = ChoiceForm(request.POST or None, request.FILES or None)
+        if forms.is_valid():
+            root = forms.save()
+            root = Buy.objects.get(pk=root.id)
+            root.product - product_pk
+            root.save()
+            return redirect('home')
+        else:
+            print(forms.errors)

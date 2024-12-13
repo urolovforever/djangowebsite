@@ -1,9 +1,10 @@
 from django.contrib import admin
-from .models import Category, Product, Buy
+from .models import *
+# Register your models here.
+class ClientAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
 
+admin.site.register(Category, ClientAdmin)
+admin.site.register(Product, ClientAdmin)
 
-# Register the models with the admin site
-admin.site.register(Category)
-admin.site.register(Product)
 admin.site.register(Buy)
-

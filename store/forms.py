@@ -1,7 +1,8 @@
 from django import forms
 from .models import Buy
 
-class ChoiceForm(forms.ModelForm):
+
+class ChoiseForm(forms.ModelForm):
     class Meta:
         model = Buy
         exclude = ['product']
